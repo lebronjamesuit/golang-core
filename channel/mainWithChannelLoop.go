@@ -41,8 +41,10 @@ func mainWithChannelLoop() {
 	// Method 2
 	// range c = Wait for the channel to emit some value; and assign the value to l
 	for l := range c {
-		time.Sleep(3 * time.Second) // this would add a pause in our main func and put it to sleep?
 		go getLinkWithChannelLoop(l, c)
+		go func() {
+			time.Sleep(3 * time.Second) // this would add a pause in our main func and put it to sleep?
+		}()
 	}
 
 }
